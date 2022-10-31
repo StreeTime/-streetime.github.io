@@ -31,20 +31,21 @@ body {
 section {
   height: 100vh;
   top: 40vh;
-  padding-bottom: 5px;
   background-size: cover;
   background-repeat: no-repeat, no-repeat;
   background-position: top;
   background-color: var(--backCol);
 }
-
-
 section * {
   color: var(--primary);
   border: 0;
   width: var(--action-width);
   margin: auto;
   background-color: transparent;
+}
+
+article {
+  padding-bottom: 5px;
 }
 
 #search, #search:focus { /*searchbox*/
