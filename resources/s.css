@@ -5,10 +5,10 @@
     --fontage: "Lucida Console", Courier, monospace;
 }
 
-/*size specific settings */
+/*screen size specific settings landscape */
 @media only screen and (max-height: 800px){
   :root {
-    --action-width: 800px;
+    --action-width: 60vw;
     --background: url('./01.jpg');
     --actionTopPad: 43vh;
     --actionLeftPad: 100px;
@@ -16,6 +16,7 @@
   }
 }
 
+/*screen size specific settings portrait */
 @media only screen and (min-height: 1500px){
   :root {
     --action-width: 90%;
@@ -35,7 +36,6 @@ body {
 }
 
 section {
-  height: 100vh;
   padding-top: 40%;
 }
 section * {
