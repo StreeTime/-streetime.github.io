@@ -31,6 +31,7 @@ body {
 section {
   height: 100vh;
   top: 40vh;
+  padding-bottom: 5px;
   background-size: cover;
   background-repeat: no-repeat, no-repeat;
   background-position: top;
