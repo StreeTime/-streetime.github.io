@@ -19,7 +19,7 @@
 /*screen size specific settings portrait */
 @media only screen and (min-height: 1500px){
   :root {
-    --action-width: 90%;
+    --action-width: 90vw;
     --background: url('./01.jpg');
     --actionTopPad: 3vh;
     --actionLeftPad: 0px;
@@ -36,7 +36,7 @@ body {
 }
 
 section {
-  padding-top: 40%;
+  padding-top: var(--actionTopPad);
 }
 section * {
   color: var(--primary);
