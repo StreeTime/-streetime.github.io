@@ -1,0 +1,13 @@
+# Built around a search box that allows for custom abbreviations.
+  - a Amazon 
+  - b Bing
+  - i Google images
+  - l lyrics genius
+  - n NixOS search
+  - r Reddit
+  - s Stackoverflow
+  - t Google translate
+  - v Bing Video
+  - w Wikipedia
+  - y Youtube
+  - 4 4chan

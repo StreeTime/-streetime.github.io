@@ -1,0 +1,59 @@
+/* global settings */
+@media only screen and (max-height: 800px){
+  :root {
+    --action-width: 800px;
+    --background: url('01.jpg');
+    --backCol: rgb(34, 34, 34);
+    --primary: rgba(255, 221, 110, 0.842);
+    --fontage: "Lucida Console", Courier, monospace;
+    --actionTopPad: 43vh;
+    --actionLeftPad: 100px;
+    --fontSize: 2em;
+  }
+}
+
+@media only screen and (min-height: 1500px){
+  :root {
+    --action-width: 90%;
+    --background: url('02.jpg');
+    --backCol: rgb(34, 34, 34);
+    --primary: rgba(255, 221, 110, 0.842);
+    --fontage: "Lucida Console", Courier, monospace;
+    --actionTopPad: 3vh;
+    --actionLeftPad: 0px;
+    --fontSize: 6em;
+  }
+}
+body {
+  margin: 0px;
+}
+
+section {
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat, no-repeat;
+  background-position: top;
+  background-color: var(--backCol);
+}
+
+input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+#uno * {
+  color: var(--primary);
+  border: 0;
+  width: var(--action-width);
+  margin: auto;
+  background-color: transparent;
+}
+#uno {
+  top: 40vh;
+}
+#search, #search:focus { /*searchbox*/
+  margin-top: 10vh;
+  font-size: var(--fontSize);
+  font-family: var(--fontage);
+  border-bottom: 1px solid var(--primary);
+  outline: none; /*makes blue outline in safari go away*/
+}
