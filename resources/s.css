@@ -30,30 +30,30 @@ body {
 
 section {
   height: 100vh;
+  top: 40vh;
   background-size: cover;
   background-repeat: no-repeat, no-repeat;
   background-position: top;
   background-color: var(--backCol);
 }
 
-input::-webkit-calendar-picker-indicator {
-  display: none;
-}
 
-#uno * {
+section * {
   color: var(--primary);
   border: 0;
   width: var(--action-width);
   margin: auto;
   background-color: transparent;
 }
-#uno {
-  top: 40vh;
-}
+
 #search, #search:focus { /*searchbox*/
   margin-top: 10vh;
   font-size: var(--fontSize);
   font-family: var(--fontage);
   border-bottom: 1px solid var(--primary);
   outline: none; /*makes blue outline in safari go away*/
+}
+
+input::-webkit-calendar-picker-indicator {
+  display: none;
 }
