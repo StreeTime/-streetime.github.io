@@ -1,11 +1,15 @@
 /* global settings */
+:root {
+    --primary: rgba(255, 221, 110, 0.842);
+    --backCol: rgb(34, 34, 34);
+    --fontage: "Lucida Console", Courier, monospace;
+}
+
+/*size specific settings */
 @media only screen and (max-height: 800px){
   :root {
     --action-width: 800px;
     --background: url('./01.jpg');
-    --backCol: rgb(34, 34, 34);
-    --primary: rgba(255, 221, 110, 0.842);
-    --fontage: "Lucida Console", Courier, monospace;
     --actionTopPad: 43vh;
     --actionLeftPad: 100px;
     --fontSize: 2em;
@@ -16,21 +20,19 @@
   :root {
     --action-width: 90%;
     --background: url('./01.jpg');
-    --backCol: rgb(34, 34, 34);
-    --primary: rgba(255, 221, 110, 0.842);
-    --fontage: "Lucida Console", Courier, monospace;
     --actionTopPad: 3vh;
     --actionLeftPad: 0px;
     --fontSize: 6em;
   }
 }
+
 body {
   margin: 0px;
 }
 
 section {
   height: 100vh;
-  top: 40vh;
+  padding-top: 40%;
   background-size: cover;
   background-repeat: no-repeat, no-repeat;
   background-position: top;
