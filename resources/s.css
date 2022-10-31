@@ -28,15 +28,15 @@
 
 body {
   margin: 0px;
+  background-size: cover;
+  background-repeat: no-repeat, no-repeat;
+  background-position: top;
+  background-color: var(--backCol);
 }
 
 section {
   height: 100vh;
   padding-top: 40%;
-  background-size: cover;
-  background-repeat: no-repeat, no-repeat;
-  background-position: top;
-  background-color: var(--backCol);
 }
 section * {
   color: var(--primary);
@@ -44,20 +44,15 @@ section * {
   width: var(--action-width);
   margin: auto;
   background-color: transparent;
-}
-
-article {
   padding-bottom: 5px;
 }
 
 #search, #search:focus { /*searchbox*/
-  margin-top: 10vh;
   font-size: var(--fontSize);
   font-family: var(--fontage);
   border-bottom: 1px solid var(--primary);
   outline: none; /*makes blue outline in safari go away*/
 }
-
 input::-webkit-calendar-picker-indicator {
   display: none;
 }
