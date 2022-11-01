@@ -27,38 +27,21 @@ function research() {
         case "a": go("https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=","+",""); break;
         case "b": go("https://www.bing.com/search?q=","+",""); break;
         case "c": go("https://www.desktopbackground.org/search?kwd=","",""); break;
-	case "i": go("https://www.bing.com/images/search?q=","+","&qft=+filterui:imagesize-custom_2560_1440"); break;
+	      case "i": go("https://www.bing.com/images/search?q=","+","&qft=+filterui:imagesize-custom_2560_1440"); break;
         case "l": go("https://genius.com/search?q=","+",""); break;
         case "n": go("https://search.nixos.org/packages?channel=22.05&from=0&size=50&sort=relevance&type=packages&query=","-",""); break;
         case "r": go("https://libreddit.spike.codes/search?q=","",""); break;
-//        case "r": go("https://www.reddit.com/search?q=","+",""); break;
         case "s": go("https://stackoverflow.com/search?q=","+",""); break; //do i want stack exchange??
         case "t": go("https://translate.google.com/#auto/en/","+",""); break;
         case "v": go("https://www.bing.com/videos/search?q=","+",""); break;
         case "w": go("https://en.wikipedia.org/w/index.php?search="," ","&title=Special%3ASearch&fulltext=1&ns0=1"); break;
         case "y": go("https://www.youtube.com/search?q=","+",""); break;
-//        case "y": go("https://invidious.snopyta.org/search?q=","",""); break;
         case "4": go("https://boards.4chan.org/search#/","",""); break;
       } //close switch
     break; //case break
     case "/": //this is a link (reddit or 4chan) find out which, go link
       switch (FirstLetter) {
-        case "4": go("https://boards.4chan.org/","","/catalog"); break;
-        case "r":   if (term.indexOf(' ') >= 0) {
-                      var final = "https://www.reddit.com/" + term.substring(0, term.indexOf(" ")) + "/search/?q=" + term.substring(term.indexOf(" ") + 1) + "&restrict_sr=1&sr_nsfw=";
-                    } else {
-                      var final = "https://www.reddit.com/" + term;
-                    }
-                    window.open(final);
-                    break;
-        case "m":
-          switch (ThirdLetter) {
-            case "d": go("https://old.reddit.com/r/startpages+unixporn+FirefoxCSS+desktops+unixart+web_design","","",""); break;
-            case "m": go("https://old.reddit.com/r/konmari+declutter+Frugal+Minimalism+SimpleLiving+minimalist","","",""); break;
-            case "s": go("https://old.reddit.com/r/avporn+malelivingspace+roomporn+macsetups+desksetup+standingdesk+cozyplaces+OffGridCabins+CozyPlaces","","",""); break;
-            case "w": go("https://old.reddit.com/r/CityPorn+animewallpaper+offensive_wallpapers+wallpaper+wallpaperdump+wallpaperrequests+wallpapers+carporn","","",""); break;
-          }
-      }
+        case "4": go("https://boards.4channel.org/","","/catalog"); break;
     break; //case break
     default : //standard search
       term = "aa" + term; //add two letters that will be removed in go
