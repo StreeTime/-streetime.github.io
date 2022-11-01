@@ -21,7 +21,7 @@ function research() {
       case "a": go("https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=","+",""); break;
       case "b": go("https://www.bing.com/search?q=","+",""); break;
       case "c": go("https://www.desktopbackground.org/search?kwd=","",""); break;
-            case "i": go("https://www.bing.com/images/search?q=","+","&qft=+filterui:imagesize-custom_2560_1440"); break;
+      case "i": go("https://www.bing.com/images/search?q=","+","&qft=+filterui:imagesize-custom_2560_1440&form=IRFLTR&first=1&tsc=ImageHoverTitle"); break;
       case "l": go("https://genius.com/search?q=","+",""); break;
       case "n": go("https://search.nixos.org/packages?channel=22.05&from=0&size=50&sort=relevance&type=packages&query=","-",""); break;
       case "r": go("https://libreddit.spike.codes/search?q=","",""); break;
