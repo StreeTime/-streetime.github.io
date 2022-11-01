@@ -1,13 +1,7 @@
 var term = ""; //global var
 
 function go(url,con,ext) {
-  window.open(url + term.slice(2).split(" ").join(con) + ext);
-  document.getElementById("search").focus().value(""); //clears, and returns focus to, the search bar
-}
-
-function bookmarkGo(url) {
-  url = term.split('|')[1];
-  window.open(url);
+  window.open(url + term.slice(2).split(" ").join(con) + ext); // this cleans up the search text into a full link
   document.getElementById("search").focus().value(""); //clears, and returns focus to, the search bar
 }
 
@@ -17,36 +11,29 @@ function research() {
   var ThirdLetter = term.charAt(2);
 
   if (FirstLetter == "[") {
-    bookmarkGo(term);
+    term = term.substring(0,2) + term.split('|')[1];
+    go("","",""); // send blank variables to fix the complications brought by having to convert searches
     return;
   };
 
-  switch (SecondLetter) {
-    case " ": //this is a search. find search engine from first letter
-      switch (FirstLetter) { //eg : go(root url,connector,extension)
-        case "a": go("https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=","+",""); break;
-        case "b": go("https://www.bing.com/search?q=","+",""); break;
-        case "c": go("https://www.desktopbackground.org/search?kwd=","",""); break;
-	      case "i": go("https://www.bing.com/images/search?q=","+","&qft=+filterui:imagesize-custom_2560_1440"); break;
-        case "l": go("https://genius.com/search?q=","+",""); break;
-        case "n": go("https://search.nixos.org/packages?channel=22.05&from=0&size=50&sort=relevance&type=packages&query=","-",""); break;
-        case "r": go("https://libreddit.spike.codes/search?q=","",""); break;
-        case "s": go("https://stackoverflow.com/search?q=","+",""); break; //do i want stack exchange??
-        case "t": go("https://translate.google.com/#auto/en/","+",""); break;
-        case "v": go("https://www.bing.com/videos/search?q=","+",""); break;
-        case "w": go("https://en.wikipedia.org/w/index.php?search="," ","&title=Special%3ASearch&fulltext=1&ns0=1"); break;
-        case "y": go("https://www.youtube.com/search?q=","+",""); break;
-        case "4": go("https://boards.4chan.org/search#/","",""); break;
-      } //close switch
-    break; //case break
-    case "/": //this is a link (reddit or 4chan) find out which, go link
-      switch (FirstLetter) {
-        case "4": go("https://boards.4channel.org/","","/catalog"); break;
-    break; //case break
-    default : //standard search
-      term = "aa" + term; //add two letters that will be removed in go
-      go("https://duckduckgo.com/?t=ffab&q=","+","");
-  }
+  if (SecondLetter == " ") {
+    switch (FirstLetter) { //eg : go(root url,connector,extension)
+      case "a": go("https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=","+",""); break;
+      case "b": go("https://www.bing.com/search?q=","+",""); break;
+      case "c": go("https://www.desktopbackground.org/search?kwd=","",""); break;
+            case "i": go("https://www.bing.com/images/search?q=","+","&qft=+filterui:imagesize-custom_2560_1440"); break;
+      case "l": go("https://genius.com/search?q=","+",""); break;
+      case "n": go("https://search.nixos.org/packages?channel=22.05&from=0&size=50&sort=relevance&type=packages&query=","-",""); break;
+      case "r": go("https://libreddit.spike.codes/search?q=","",""); break;
+      case "s": go("https://stackoverflow.com/search?q=","+",""); break; //do i want stack exchange??
+      case "t": go("https://translate.google.com/#auto/en/","+",""); break;
+      case "v": go("https://www.bing.com/videos/search?q=","+",""); break;
+      case "w": go("https://en.wikipedia.org/w/index.php?search="," ","&title=Special%3ASearch&fulltext=1&ns0=1"); break;
+      case "y": go("https://www.youtube.com/search?q=","+",""); break;
+    } // close switch, default is unnecessary
+  } // close if
+  term = "aa" + term; //add two letters that will be removed in go
+  go("https://duckduckgo.com/?t=ffab&q=","+",""); // this picks up anything who is not a bookmark or a devised search term. aka default behaviour
 }
 
 function StageOne(enteredtext) {
