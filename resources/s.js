@@ -44,15 +44,20 @@ function StageOne(enteredtext) {
   }
   if (term.length == 1) {
     switch (term) {
+      case "1": window.open("/resources/01.jpg"); break;
       case "2": window.open("/resources/02.jpg"); break;
+      case "3": window.open("/resources/03.jpg"); break;
+      case "4": window.open("/resources/04.jpg"); break;
+      case "5": window.open("/resources/05.jpg"); break;
+      case "6": window.open("/resources/06.jpg"); break;
       case "a": window.open("https://amazon.co.uk"); break;
       case "b": window.open("http://192.168.1.254/"); break;
       case "f": window.open("https://facebook.com"); break;
       case "i": window.open("https://images.google.co.uk"); break;
       case "l": window.open("https://genius.com"); break;
-      case "p": window.open("http://192.168.1.247/admin/"); break;
+      case "p": window.open("https://www.pixiv.net/en/"); break;
       case "r": window.open("https://www.reddit.com/r/all/"); break;
-      case "t": window.open("https://twitter.com"); break;
+      case "t": window.open("https://www.tumblr.com"); break;
       case "w": window.open("https://wikipedia.org"); break;
       case "y": window.open("https://youtube.com"); break;
     }
