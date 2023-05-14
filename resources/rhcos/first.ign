@@ -18,6 +18,7 @@
         "group": {
           "name": "s"
         },
+        "overwrite": true,
         "path": "/var/home/s/.bashrc",
         "user": {
           "name": "s"
