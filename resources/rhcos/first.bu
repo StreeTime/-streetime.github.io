@@ -25,7 +25,7 @@ storage:
           alias ls="ls -Ahlp"
           alias blkid="sudo blkid"
           alias fdisk="sudo fdisk"
-          alias shutdown="shutdown now"
+          alias shutdown="sudo shutdown now"
       mode: 0644
       user:
         name: s
