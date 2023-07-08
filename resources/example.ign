@@ -26,10 +26,16 @@
         "mode": 420
       },
       {
+        "group": {
+          "name": "core"
+        },
         "overwrite": true,
         "path": "/var/home/core/.bashrc",
+        "user": {
+          "name": "core"
+        },
         "contents": {
-          "source": "data:,alias%20ls%3D%22ls%20-lah%0Aalias%20yt%3D%22ytfzf%20-f%20--detach%22%0Aalias%20ytdown%3D%22ytfzf%20-dam%22%0Aalias%20blkid%3D%22sudo%20blkid%22%0Aalias%20fdisk%3D%22sudo%20fdisk%22%0Aalias%20shutdown%3D%22sudo%20shutdown%20now%22%0A"
+          "source": "data:,alias%20vim%3D%22vi%22%0Aalias%20ls%3D%22ls%20-lah%22%0Aalias%20yt%3D%22ytfzf%20-f%20--detach%22%0Aalias%20ytdown%3D%22ytfzf%20-dam%22%0Aalias%20blkid%3D%22sudo%20blkid%22%0Aalias%20fdisk%3D%22sudo%20fdisk%22%0Aalias%20shutdown%3D%22sudo%20shutdown%20now%22%0A"
         },
         "mode": 420
       }
@@ -41,6 +47,11 @@
         "contents": "[Unit]\nDescription=Portainer Admin Container\nAfter=docker.service\nRequires=docker.service network.target network-online.target\n[Service]\nType=oneshot\nRemainAfterExit=yes\nTimeoutStartSec=0\nExecStartPre=-/usr/bin/docker stop %n\nExecStartPre=-/usr/bin/docker rm %n\nExecStartPre=/usr/bin/docker pull portainer/portainer-ce\nExecStart=-/usr/bin/mkdir -p /mnt/shared_nfs/portainer_data\n# Privileged mode is required for binding to local socket to work due to SELINUX (https://github.com/portainer/portainer/issues/849)\nExecStart=/usr/bin/docker run --privileged=true -d -p 9000:9000 --name %n --restart always -v /var/run/docker.sock:/var/run/docker.sock -v /var/portainer_data:/data portainer/portainer-ce\nExecStop=/usr/bin/docker stop -t 15 %n\n[Install]\nWantedBy=multi-user.target",
         "enabled": true,
         "name": "docker.portainer.service"
+      },
+      {
+        "contents": "[Unit]\nDescription=Navidrome Music Server\nAfter=docker.service\nRequires=docker.service network.target network-online.target\n[Service]\nType=oneshot\nRemainAfterExit=yes\nTimeoutStartSec=0\nExecStartPre=-/usr/bin/docker stop %n\nExecStartPre=-/usr/bin/docker rm %n\nExecStartPre=/usr/bin/docker pull deluan/navidrome\nExecStart=-/usr/bin/mkdir -p /mnt/shared_nfs/navidrome_data\nExecStart=/usr/bin/docker run --privileged=true -d -p 4533:4533 --name %n --restart always -v /var/run/docker.sock:/var/run/docker.sock -v /var/navidrome_data:/data \"/run/media/music:/music:ro\nExecStop=/usr/bin/docker stop -t 15 %n\n[Install]\nWantedBy=multi-user.target",
+        "enabled": true,
+        "name": "docker.navidrome.service"
       }
     ]
   }

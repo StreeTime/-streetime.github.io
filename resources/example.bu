@@ -25,10 +25,15 @@ storage:
           mini
     - path: /var/home/core/.bashrc
       mode: 0644
+      user:
+        name: core
+      group:
+        name: core
       overwrite: true
       contents:
         inline: |
-          alias ls="ls -lah
+          alias vim="vi"
+          alias ls="ls -lah"
           alias yt="ytfzf -f --detach"
           alias ytdown="ytfzf -dam"
           alias blkid="sudo blkid"
@@ -56,3 +61,24 @@ systemd:
         ExecStop=/usr/bin/docker stop -t 15 %n
         [Install]
         WantedBy=multi-user.target
+
+    - name: docker.navidrome.service
+      enabled: true
+      contents: |-
+        [Unit]
+        Description=Navidrome Music Server
+        After=docker.service
+        Requires=docker.service network.target network-online.target
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        TimeoutStartSec=0
+        ExecStartPre=-/usr/bin/docker stop %n
+        ExecStartPre=-/usr/bin/docker rm %n
+        ExecStartPre=/usr/bin/docker pull deluan/navidrome
+        ExecStart=-/usr/bin/mkdir -p /mnt/shared_nfs/navidrome_data
+        ExecStart=/usr/bin/docker run --privileged=true -d -p 4533:4533 --name %n --restart always -v /var/run/docker.sock:/var/run/docker.sock -v /var/navidrome_data:/data "/run/media/music:/music:ro
+        ExecStop=/usr/bin/docker stop -t 15 %n
+        [Install]
+        WantedBy=multi-user.target
+
