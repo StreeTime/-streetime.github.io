@@ -2,7 +2,7 @@ variant: fcos
 version: 1.0.0
 passwd:
   users:
-    - name: s
+    - name: core
       ssh_authorized_keys:
         - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDlAl4DVMLfwZnagDboJ9bDPBZwF1EAwuoXf0XDH4FaMX+IEdIyUTiASrau7P8XSw/3Wd0xoJOB5lB8zema2UxphnhHYy5JpzFQ5XjCZmAJtbCswDwwnt6KF3ABHa49GmRVaSW/B24Kz1ZfVDBC7PF2b4oXgJ/aWs7PBO7xyV3Qx3JLpnu1HbWI1GkL+j1YaK3CaxodI3nEoCXaMQFSHje0hMc3C7nWSt46bRyl8j9Fe8CL6JOovhWr+z4yQaAClDZ8LDk/Usu8vcjbgd1o3iG/u5z5d83kkQLEPTaCCiNTB4pA508rxm72lUPhkBguhaEAbiWAX3DPQF/mFUSE8RHMceVdN5vBdfIR/OKekCLqTcz4D4K1ZCiukFYUNe1BfbrguLj98J5ihbGMFacDOC30ix/QGA0wHPUf8VhXjxS8tQ6Ww2HVKP/gmY1TdQv15ih30OpxxRuBwldON5F90HU9zZr3b1AsZZbq1yCmf3UGZOE3iwRrps/TKP4kZam0cgs= s@book.local
       groups:
@@ -10,19 +10,30 @@ passwd:
         - "docker"
       
 storage:
+  disks:
+  - device: /dev/sda
+    wipe_table: false
   filesystems:
-  - path: /var/mnt
-    device: /dev/sda1
+  - path: /run/media
+    device: /dev/disk/by-label/mocha
     format: ext4
-
+    with_mount_unit: true
   files:
     - path: /etc/hostname
       mode: 0644
       contents:
         inline: |
           mini
-
-
+    - path: /var/home/core/.bashrc
+      mode: 0644
+      contents:
+        inline: |
+          alias ls="ls -lah
+          alias yt="ytfzf -f --detach"
+          alias ytdown="ytfzf -dam"
+          alias blkid="sudo blkid"
+          alias fdisk="sudo fdisk"
+          alias shutdown="sudo shutdown now"
 systemd:
   units:
     - name: docker.portainer.service
