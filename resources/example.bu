@@ -10,13 +10,13 @@ passwd:
         - "docker"
       
 storage:
-  disks:
-  - device: /dev/sda
-    wipe_table: false
-  filesystems:
-  - path: /run/media
-    device: /dev/disk/by-label/mocha
-    format: ext4
+#  disks:
+#  - device: /dev/sda
+#    wipe_table: false
+#  filesystems:
+#  - path: /run/media
+#    device: /dev/disk/by-label/mocha
+#    format: ext4
   files:
     - path: /etc/hostname
       mode: 0644
