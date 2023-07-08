@@ -17,7 +17,6 @@ storage:
   - path: /run/media
     device: /dev/disk/by-label/mocha
     format: ext4
-    with_mount_unit: true
   files:
     - path: /etc/hostname
       mode: 0644

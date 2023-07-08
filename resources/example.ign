@@ -1,0 +1,59 @@
+{
+  "ignition": {
+    "version": "3.0.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "groups": [
+          "sudo",
+          "docker"
+        ],
+        "name": "core",
+        "sshAuthorizedKeys": [
+          "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDlAl4DVMLfwZnagDboJ9bDPBZwF1EAwuoXf0XDH4FaMX+IEdIyUTiASrau7P8XSw/3Wd0xoJOB5lB8zema2UxphnhHYy5JpzFQ5XjCZmAJtbCswDwwnt6KF3ABHa49GmRVaSW/B24Kz1ZfVDBC7PF2b4oXgJ/aWs7PBO7xyV3Qx3JLpnu1HbWI1GkL+j1YaK3CaxodI3nEoCXaMQFSHje0hMc3C7nWSt46bRyl8j9Fe8CL6JOovhWr+z4yQaAClDZ8LDk/Usu8vcjbgd1o3iG/u5z5d83kkQLEPTaCCiNTB4pA508rxm72lUPhkBguhaEAbiWAX3DPQF/mFUSE8RHMceVdN5vBdfIR/OKekCLqTcz4D4K1ZCiukFYUNe1BfbrguLj98J5ihbGMFacDOC30ix/QGA0wHPUf8VhXjxS8tQ6Ww2HVKP/gmY1TdQv15ih30OpxxRuBwldON5F90HU9zZr3b1AsZZbq1yCmf3UGZOE3iwRrps/TKP4kZam0cgs= s@book.local"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "disks": [
+      {
+        "device": "/dev/sda",
+        "wipeTable": false
+      }
+    ],
+    "files": [
+      {
+        "path": "/etc/hostname",
+        "contents": {
+          "source": "data:,mini%0A"
+        },
+        "mode": 420
+      },
+      {
+        "path": "/var/home/core/.bashrc",
+        "contents": {
+          "source": "data:,alias%20ls%3D%22ls%20-lah%0Aalias%20yt%3D%22ytfzf%20-f%20--detach%22%0Aalias%20ytdown%3D%22ytfzf%20-dam%22%0Aalias%20blkid%3D%22sudo%20blkid%22%0Aalias%20fdisk%3D%22sudo%20fdisk%22%0Aalias%20shutdown%3D%22sudo%20shutdown%20now%22%0A"
+        },
+        "mode": 420
+      }
+    ],
+    "filesystems": [
+      {
+        "device": "/dev/disk/by-label/mocha",
+        "format": "ext4",
+        "path": "/run/media"
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "contents": "[Unit]\nDescription=Portainer Admin Container\nAfter=docker.service\nRequires=docker.service network.target network-online.target\n[Service]\nType=oneshot\nRemainAfterExit=yes\nTimeoutStartSec=0\nExecStartPre=-/usr/bin/docker stop %n\nExecStartPre=-/usr/bin/docker rm %n\nExecStartPre=/usr/bin/docker pull portainer/portainer-ce\nExecStart=-/usr/bin/mkdir -p /mnt/shared_nfs/portainer_data\n# Privileged mode is required for binding to local socket to work due to SELINUX (https://github.com/portainer/portainer/issues/849)\nExecStart=/usr/bin/docker run --privileged=true -d -p 9000:9000 --name %n --restart always -v /var/run/docker.sock:/var/run/docker.sock -v /var/portainer_data:/data portainer/portainer-ce\nExecStop=/usr/bin/docker stop -t 15 %n\n[Install]\nWantedBy=multi-user.target",
+        "enabled": true,
+        "name": "docker.portainer.service"
+      }
+    ]
+  }
+}
