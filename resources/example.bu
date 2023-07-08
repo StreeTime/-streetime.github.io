@@ -10,13 +10,13 @@ passwd:
         - "docker"
       
 storage:
-#  disks:
-#  - device: /dev/sda
-#    wipe_table: false
-#  filesystems:
-#  - path: /run/media
-#    device: /dev/disk/by-label/mocha
-#    format: ext4
+  disks:
+  - device: /dev/sda
+    wipe_table: false
+  filesystems:
+  - path: /run/media
+    device: /dev/disk/by-label/mocha
+    format: ext4
   files:
     - path: /etc/hostname
       mode: 0644
@@ -34,51 +34,9 @@ storage:
         inline: |
           alias vim="vi"
           alias ls="ls -lah"
-          alias yt="ytfzf -f --detach"
-          alias ytdown="ytfzf -dam"
           alias blkid="sudo blkid"
           alias fdisk="sudo fdisk"
+          alias reboot="sudo reboot"
           alias shutdown="sudo shutdown now"
-systemd:
-  units:
-    - name: docker.portainer.service
-      enabled: true
-      contents: |-
-        [Unit]
-        Description=Portainer Admin Container
-        After=docker.service
-        Requires=docker.service network.target network-online.target
-        [Service]
-        Type=oneshot
-        RemainAfterExit=yes
-        TimeoutStartSec=0
-        ExecStartPre=-/usr/bin/docker stop %n
-        ExecStartPre=-/usr/bin/docker rm %n
-        ExecStartPre=/usr/bin/docker pull portainer/portainer-ce
-        ExecStart=-/usr/bin/mkdir -p /mnt/shared_nfs/portainer_data
-        # Privileged mode is required for binding to local socket to work due to SELINUX (https://github.com/portainer/portainer/issues/849)
-        ExecStart=/usr/bin/docker run --privileged=true -d -p 9000:9000 --name %n --restart always -v /var/run/docker.sock:/var/run/docker.sock -v /var/portainer_data:/data portainer/portainer-ce
-        ExecStop=/usr/bin/docker stop -t 15 %n
-        [Install]
-        WantedBy=multi-user.target
 
-    - name: docker.navidrome.service
-      enabled: true
-      contents: |-
-        [Unit]
-        Description=Navidrome Music Server
-        After=docker.service
-        Requires=docker.service network.target network-online.target
-        [Service]
-        Type=oneshot
-        RemainAfterExit=yes
-        TimeoutStartSec=0
-        ExecStartPre=-/usr/bin/docker stop %n
-        ExecStartPre=-/usr/bin/docker rm %n
-        ExecStartPre=/usr/bin/docker pull deluan/navidrome
-        ExecStart=-/usr/bin/mkdir -p /mnt/shared_nfs/navidrome_data
-        ExecStart=/usr/bin/docker run --privileged=true -d -p 4533:4533 --name %n --restart always -v /var/run/docker.sock:/var/run/docker.sock -v /var/navidrome_data:/data "/run/media/music:/music:ro
-        ExecStop=/usr/bin/docker stop -t 15 %n
-        [Install]
-        WantedBy=multi-user.target
 
