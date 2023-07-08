@@ -12,11 +12,11 @@ passwd:
       
 storage:
   disks:
-  - device: /dev/disk/by-id/wwn-0x500a0751e685c1e8
+  - device: /dev/disk/by-label/mocha
     wipe_table: false
   filesystems:
   - path: /srv
-    device: /dev/disk/by-id/wwn-0x500a0751e685c1e8
+    device: /dev/disk/by-label/mocha
     format: ext4
 
   files:
