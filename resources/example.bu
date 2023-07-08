@@ -5,18 +5,14 @@ passwd:
     - name: s
       ssh_authorized_keys:
         - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDlAl4DVMLfwZnagDboJ9bDPBZwF1EAwuoXf0XDH4FaMX+IEdIyUTiASrau7P8XSw/3Wd0xoJOB5lB8zema2UxphnhHYy5JpzFQ5XjCZmAJtbCswDwwnt6KF3ABHa49GmRVaSW/B24Kz1ZfVDBC7PF2b4oXgJ/aWs7PBO7xyV3Qx3JLpnu1HbWI1GkL+j1YaK3CaxodI3nEoCXaMQFSHje0hMc3C7nWSt46bRyl8j9Fe8CL6JOovhWr+z4yQaAClDZ8LDk/Usu8vcjbgd1o3iG/u5z5d83kkQLEPTaCCiNTB4pA508rxm72lUPhkBguhaEAbiWAX3DPQF/mFUSE8RHMceVdN5vBdfIR/OKekCLqTcz4D4K1ZCiukFYUNe1BfbrguLj98J5ihbGMFacDOC30ix/QGA0wHPUf8VhXjxS8tQ6Ww2HVKP/gmY1TdQv15ih30OpxxRuBwldON5F90HU9zZr3b1AsZZbq1yCmf3UGZOE3iwRrps/TKP4kZam0cgs= s@book.local
-        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFPC+8iEqN1fQQp6ZXE78bx2AZDBS5lDlVgcD00LxryO s@book.local
       groups:
         - "sudo"
         - "docker"
       
 storage:
-  disks:
-  - device: /dev/disk/by-label/mocha
-    wipe_table: false
   filesystems:
-  - path: /var/srv
-    device: /dev/disk/by-label/mocha
+  - path: /var/mnt
+    device: /dev/sda1
     format: ext4
 
   files:
@@ -26,22 +22,26 @@ storage:
         inline: |
           mini
 
+
 systemd:
   units:
-    - name: hello.service
+    - name: docker.portainer.service
       enabled: true
-      contents: |
+      contents: |-
         [Unit]
-        Description=MyApp
-        After=network-online.target
-        Wants=network-online.target
-
+        Description=Portainer Admin Container
+        After=docker.service
+        Requires=docker.service network.target network-online.target
         [Service]
+        Type=oneshot
+        RemainAfterExit=yes
         TimeoutStartSec=0
-        ExecStartPre=-/bin/podman kill busybox1
-        ExecStartPre=-/bin/podman rm busybox1
-        ExecStartPre=/bin/podman pull busybox
-        ExecStart=/bin/podman run --name busybox1 busybox /bin/sh -c "trap 'exit 0' INT TERM; while true; do echo Hello World; sleep 1; done"
-
+        ExecStartPre=-/usr/bin/docker stop %n
+        ExecStartPre=-/usr/bin/docker rm %n
+        ExecStartPre=/usr/bin/docker pull portainer/portainer-ce
+        ExecStart=-/usr/bin/mkdir -p /mnt/shared_nfs/portainer_data
+        # Privileged mode is required for binding to local socket to work due to SELINUX (https://github.com/portainer/portainer/issues/849)
+        ExecStart=/usr/bin/docker run --privileged=true -d -p 9000:9000 --name %n --restart always -v /var/run/docker.sock:/var/run/docker.sock -v /var/portainer_data:/data portainer/portainer-ce
+        ExecStop=/usr/bin/docker stop -t 15 %n
         [Install]
         WantedBy=multi-user.target
