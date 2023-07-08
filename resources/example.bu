@@ -15,7 +15,7 @@ storage:
   - device: /dev/disk/by-label/mocha
     wipe_table: false
   filesystems:
-  - path: /srv
+  - path: /var/srv
     device: /dev/disk/by-label/mocha
     format: ext4
 

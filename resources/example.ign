@@ -37,7 +37,7 @@
       {
         "device": "/dev/disk/by-label/mocha",
         "format": "ext4",
-        "path": "/srv"
+        "path": "/var/srv"
       }
     ]
   },
