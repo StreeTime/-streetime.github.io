@@ -26,6 +26,7 @@
         "mode": 420
       },
       {
+        "overwrite": true,
         "path": "/var/home/core/.bashrc",
         "contents": {
           "source": "data:,alias%20ls%3D%22ls%20-lah%0Aalias%20yt%3D%22ytfzf%20-f%20--detach%22%0Aalias%20ytdown%3D%22ytfzf%20-dam%22%0Aalias%20blkid%3D%22sudo%20blkid%22%0Aalias%20fdisk%3D%22sudo%20fdisk%22%0Aalias%20shutdown%3D%22sudo%20shutdown%20now%22%0A"

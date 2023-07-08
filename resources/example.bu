@@ -25,6 +25,7 @@ storage:
           mini
     - path: /var/home/core/.bashrc
       mode: 0644
+      overwrite: true
       contents:
         inline: |
           alias ls="ls -lah
