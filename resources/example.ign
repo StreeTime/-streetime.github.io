@@ -1,0 +1,53 @@
+{
+  "ignition": {
+    "version": "3.0.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "groups": [
+          "sudo",
+          "docker"
+        ],
+        "name": "s",
+        "sshAuthorizedKeys": [
+          "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDlAl4DVMLfwZnagDboJ9bDPBZwF1EAwuoXf0XDH4FaMX+IEdIyUTiASrau7P8XSw/3Wd0xoJOB5lB8zema2UxphnhHYy5JpzFQ5XjCZmAJtbCswDwwnt6KF3ABHa49GmRVaSW/B24Kz1ZfVDBC7PF2b4oXgJ/aWs7PBO7xyV3Qx3JLpnu1HbWI1GkL+j1YaK3CaxodI3nEoCXaMQFSHje0hMc3C7nWSt46bRyl8j9Fe8CL6JOovhWr+z4yQaAClDZ8LDk/Usu8vcjbgd1o3iG/u5z5d83kkQLEPTaCCiNTB4pA508rxm72lUPhkBguhaEAbiWAX3DPQF/mFUSE8RHMceVdN5vBdfIR/OKekCLqTcz4D4K1ZCiukFYUNe1BfbrguLj98J5ihbGMFacDOC30ix/QGA0wHPUf8VhXjxS8tQ6Ww2HVKP/gmY1TdQv15ih30OpxxRuBwldON5F90HU9zZr3b1AsZZbq1yCmf3UGZOE3iwRrps/TKP4kZam0cgs= s@book.local",
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFPC+8iEqN1fQQp6ZXE78bx2AZDBS5lDlVgcD00LxryO s@book.local"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "disks": [
+      {
+        "device": "/dev/disk/by-id/wwn-0x500a0751e685c1e8",
+        "wipeTable": false
+      }
+    ],
+    "files": [
+      {
+        "path": "/etc/hostname",
+        "contents": {
+          "source": "data:,mini%0A"
+        },
+        "mode": 420
+      }
+    ],
+    "filesystems": [
+      {
+        "device": "/dev/disk/by-id/wwn-0x500a0751e685c1e8",
+        "format": "ext4",
+        "path": "/srv"
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "contents": "[Unit]\nDescription=MyApp\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nTimeoutStartSec=0\nExecStartPre=-/bin/podman kill busybox1\nExecStartPre=-/bin/podman rm busybox1\nExecStartPre=/bin/podman pull busybox\nExecStart=/bin/podman run --name busybox1 busybox /bin/sh -c \"trap 'exit 0' INT TERM; while true; do echo Hello World; sleep 1; done\"\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "hello.service"
+      }
+    ]
+  }
+}
