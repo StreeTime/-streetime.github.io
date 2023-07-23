@@ -23,7 +23,7 @@ function research() {
       case "c": go("https://www.desktopbackground.org/search?kwd=","",""); break;
       case "i": go("https://www.bing.com/images/search?q=","+","&qft=+filterui:imagesize-custom_2560_1440&form=IRFLTR&first=1&tsc=ImageHoverTitle"); break;
       case "l": go("https://genius.com/search?q=","+",""); break;
-      case "n": go("https://search.nixos.org/packages?channel=22.05&from=0&size=50&sort=relevance&type=packages&query=","-",""); break;
+      case "n": go("https://search.nixos.org/packages?channel=23.05&from=0&size=50&sort=relevance&type=packages&query=","-",""); break;
       case "r": go("https://www.reddit.com/search/?q=","",""); break;
       case "s": go("https://stackoverflow.com/search?q=","+",""); break; //do i want stack exchange??
       case "t": go("https://translate.google.com/#auto/en/","+",""); break;
