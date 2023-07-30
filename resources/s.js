@@ -16,6 +16,15 @@ function research() {
     return;
   };
 
+  if (SecondLetter == "/") {
+    switch (FirstLetter) {
+      case "4": window.open("https://boards.4chan.org/" + term.substring(0,2)); break;
+      case "r": window.open("https://www.reddit.com/r/" + term.substring(0,2)); break;
+      window.alert("unknown usage");
+      return;
+    }
+  }
+
   if (SecondLetter == " ") {
     switch (FirstLetter) { //eg : go(root url,connector,extension)
       case "a": go("https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=","+",""); break;
