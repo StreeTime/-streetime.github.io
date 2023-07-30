@@ -18,7 +18,7 @@ function research() {
 
   if (SecondLetter == "/") {
     switch (FirstLetter) {
-      case "4": window.open("https://boards.4chan.org/" + term.slice(2) + "catalog"); break;
+      case "4": window.open("https://boards.4chan.org/" + term.slice(2) + "/catalog"); break;
       case "r": window.open("https://www.reddit.com/r/" + term.slice(2)); break;
       window.alert("unknown usage");
       return;
