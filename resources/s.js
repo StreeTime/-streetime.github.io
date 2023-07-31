@@ -42,7 +42,7 @@ function research() {
     } // close switch, default is unnecessary
   } // close if
   term = "aa" + term; //add two letters that will be removed in go
-  go("https://yandex.com/search/?text=","+",""); // this picks up anything who is not a bookmark or a devised search term. aka default behaviour
+  go("https://duckduckgo.com/?q=","+",""); // this picks up anything who is not a bookmark or a devised search term. aka default behaviour
 }
 
 function StageOne(enteredtext) {
