@@ -18,8 +18,8 @@ function research() {
 
   if (SecondLetter == "/") {
     switch (FirstLetter) {
-      case "4": window.open("https://boards.4chan.org/" + term.slice(2) + "/catalog"); break;
-      case "r": window.open("https://www.reddit.com/r/" + term.slice(2)); break;
+      case "4": go("https://boards.4chan.org/","","/catalog"); break;
+      case "r": go("https://www.reddit.com/r/","",""); break;
       window.alert("unknown usage");
       return;
     }
