@@ -19,7 +19,7 @@ function research() {
   if (SecondLetter == "/") {
     switch (FirstLetter) {
       case "4": go("https://boards.4chan.org/","","/catalog"); break;
-      case "r": go("https://www.reddit.com/r/","",""); break;
+      case "r": go("https://old.reddit.com/r/","",""); break;
       window.alert("unknown usage");
       return;
     }
